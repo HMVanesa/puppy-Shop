@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right" style=  "font-size: 2em;font-family: 'Nunito'">{{ __('Nombre') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right" style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}"  autofocus>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="form-group row">
-                                  <label for="lastname" class="col-md-4 col-form-label text-md-right"style=  "font-size: 2.2em;font-family: 'Nunito'">{{ __('Apellido') }}</label>
+                                  <label for="lastname" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('Apellido') }}</label>
 
                                   <div class="col-md-6">
                                       <input id="lastname" type="text" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" name="lastname" value="{{ old('lastname') }}"  autofocus>
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right"style=  "font-size: 2em;font-family: 'Nunito'">{{ __('Teléfono') }}</label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('Teléfono') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}"  autofocus>
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="adress" class="col-md-4 col-form-label text-md-right"style= "font-size: 2em;font-family: 'Nunito'">{{ __('Domicilio') }}</label>
+                            <label for="adress" class="col-md-4 col-form-label text-md-right"style= "font-size: 1.7em;font-family: 'Nunito'">{{ __('Domicilio') }}</label>
 
                             <div class="col-md-6">
                                 <input id="adress" type="text" class="form-control{{ $errors->has('adress') ? ' is-invalid' : '' }}" name="adress" value="{{ old('adress') }}"  autofocus>
@@ -71,7 +71,23 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"style=  "font-size: 2em;font-family: 'Nunito'">{{ __('E-Mail') }}</label>
+                            <label for="country" class="col-md-4 col-form-label text-md-right"style= "font-size: 1.7em;font-family: 'Nunito'">{{ __('País') }}
+
+                            </label>
+
+                            <div class="col-md-6">
+                               <select id="country" name="country" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}"  autofocus>  </select>
+
+                                @if ($errors->has('country'))
+                                    <span class="invalid-feedback"style="font-size: 1.2em;font-family: 'Nunito'">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('E-Mail') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" >
@@ -85,7 +101,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"style=  "font-size: 2em;font-family: 'Nunito'">Subí tu imagen</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">Subí tu imagen</label>
 
                             <div class="col-md-6">
                                 <input id="avatar" type="file" class="form-control{{ $errors->has('avatar') ? ' is-invalid' : '' }}" name="avatar" >
@@ -99,7 +115,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"style=  "font-size: 2em;font-family: 'Nunito'">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
@@ -113,7 +129,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"style=  "font-size: 2em;font-family: 'Nunito'">{{ __('Confirma tu Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('Confirma tu Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
@@ -133,4 +149,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    var selectPaises = document.querySelector('#country');
+    fetch('https://restcountries.eu/rest/v2/all')
+  				.then(function (response) {
+  					return response.json();
+  				})
+  				.then(function (responseParseado) {
+  					for (var n in responseParseado) {
+  						var option = `<option value="${responseParseado[n].alpha2Code}"> ${responseParseado[n].name} </option>`;
+  						selectPaises.innerHTML += option;
+  					}
+  				})
+  				.catch(function (error) {
+  					console.error(`El error fue: ${error}`);
+  				});
+  </script>
+
 @endsection
