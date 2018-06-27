@@ -72,11 +72,12 @@
 
                         <div class="form-group row">
                             <label for="country" class="col-md-4 col-form-label text-md-right"style= "font-size: 1.7em;font-family: 'Nunito'">{{ __('País') }}
-
                             </label>
 
                             <div class="col-md-6">
-                               <select id="country" name="country" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}"  autofocus>  </select>
+                               <select id="country" name="country" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}"  autofocus>
+                                      <option value=""> Soy de </option>
+                               </select>
 
                                 @if ($errors->has('country'))
                                     <span class="invalid-feedback"style="font-size: 1.2em;font-family: 'Nunito'">
@@ -85,6 +86,24 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-md-4 col-form-label text-md-right"style= "font-size: 1.7em;font-family: 'Nunito'">{{ __('Provincia') }}
+
+                            </label>
+
+                            <div class="col-md-6">
+                               <select id="regiones" name="regiones" class="form-control{{ $errors->has('regiones') ? ' is-invalid' : '' }}" name="regiones" value="{{ old('regiones') }}"  autofocus>
+                                      <option value=""> Por favor elegí una provincia </option>
+                               </select>
+
+                                @if ($errors->has('regiones'))
+                                    <span class="invalid-feedback"style="font-size: 1.2em;font-family: 'Nunito'">
+                                        <strong>{{ $errors->first('regiones') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"style=  "font-size: 1.7em;font-family: 'Nunito'">{{ __('E-Mail') }}</label>
@@ -151,20 +170,60 @@
 </div>
 
 <script>
-    var selectPaises = document.querySelector('#country');
-    fetch('https://restcountries.eu/rest/v2/all')
-  				.then(function (response) {
-  					return response.json();
-  				})
-  				.then(function (responseParseado) {
-  					for (var n in responseParseado) {
-  						var option = `<option value="${responseParseado[n].alpha2Code}"> ${responseParseado[n].name} </option>`;
-  						selectPaises.innerHTML += option;
-  					}
-  				})
-  				.catch(function (error) {
-  					console.error(`El error fue: ${error}`);
-  				});
-  </script>
+  var selectPaises = document.querySelector('#country');
+  var selectRegiones = document.querySelector('#regiones');
+
+  selectRegiones.style.display = 'none';
+
+
+  var urlPaises = 'http://pilote.techo.org/?do=api.getPaises';
+  var urlRegiones = 'http://pilote.techo.org/?do=api.getRegiones?idPais=';
+
+  pedidoAjax(urlPaises, cargarPaises);
+
+  function pedidoAjax (url, laFuncion) {
+  fetch(url)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    var loQueDeseo = data.contenido;
+    laFuncion(loQueDeseo);
+  })
+  .catch(function (error) {
+    console.error(`ERROR: ${error}`);
+  });
+  };
+
+  function cargarPaises (country) {
+  for (var n in country) {
+  var option = `<option value="${country[n]}"> ${n} </option>`;
+  selectPaises.innerHTML += option;
+  }
+
+  selectPaises.onchange = function () {
+  var idPais = this.value;
+
+  if (!idPais) {
+    selectRegiones.style.display = 'none';
+
+  } else {
+    selectRegiones.style.display = 'block';
+  }
+
+  if (selectRegiones.hasChildNodes()) selectRegiones.innerHTML = '';
+
+  pedidoAjax(urlRegiones + idPais, cargarRegiones);
+  };
+  }
+
+  function cargarRegiones (regiones) {
+  for (var n in regiones) {
+  var option = `<option value="${regiones[n]}"> ${n} </option>`;
+  selectRegiones.innerHTML += option;
+    }
+  }
+
+</script>
 
 @endsection
